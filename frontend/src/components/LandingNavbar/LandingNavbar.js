@@ -19,8 +19,8 @@ const LandingNavbar = (props) => {
         <AppBar position='fixed' className='appbar'>
           <Toolbar className='toolbar'>
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <span style={{fontSize: '40px', fontWeight: 'bold', color: 'orange', fontFamily: 'auto'}}>United</span>
-                <img src={logo} style={{cursor: 'pointer'}} width='120' height='80' alt='' onClick={() => {history.push('/');}}/>
+                <span style={{fontSize: '40px', fontWeight: 'bold', color: 'orange', fontFamily: 'auto'}}>Airport Management System</span>
+                {/* <img src={logo} style={{cursor: 'pointer'}} width='120' height='80' alt='' onClick={() => {history.push('/');}}/> */}
             </div>
             <div style={{paddingRight:'50px'}}>
             <Button

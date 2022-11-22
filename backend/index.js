@@ -3,6 +3,8 @@ import cookieParser from 'cookie-parser';
 import mongoose from "mongoose";
 import cors from 'cors';
 import connectMongoDB from './utils/dbConnection.js';
+import flight from "./routes/viewFlights.js";
+import gate from "./routes/gate.js";
 
 // const mysql = require("mysql");
 import mysql from 'mysql';
@@ -14,7 +16,7 @@ app.use(cookieParser());
 
 
 app.use(function (req, res, next) {
-   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3008');
+   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
@@ -50,7 +52,8 @@ const port = 3001;
 app.get('/', (req, res) => {
     res.send("Hello World")
 });
-
+app.use('/view',flight);
+app.use('/gate',gate);
 // connectMongoDB();
 
 // const db = mongoose.connection; 

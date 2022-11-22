@@ -14,7 +14,7 @@ const db = mysql.createConnection({
     host: constants.HOST,
     user: constants.USER,
     password: constants.PASSWORD,
-    database: constants.DB
+    database: constants.DATABASE
   });
   
   // open the MySQL connection

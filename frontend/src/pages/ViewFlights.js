@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
   Grid,
   TextField,
@@ -10,9 +11,10 @@ import {
   FormControl,
 } from '@mui/material';
 import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
-import '../pages/styles.css';
+// import '../pages/styles.css';
 
 import { DataGrid } from '@mui/x-data-grid';
+
 
 const ViewFlight = () => {
   const [userType, setUserType] = useState('employee');
@@ -63,13 +65,13 @@ const ViewFlight = () => {
     <div>
       <LandingNavbar  />
         <div className="landingpage">
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: '80%', background: 'white', marginLeft:'50px' }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
         </div>
