@@ -117,7 +117,7 @@ const AddFlight = () => {
         console.log(departure);
 
         axios
-        .post("http://localhost:3001/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : 1, departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
+        .post("http://localhost:3001/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : localStorage.getItem('airline'), departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
         .then((res) => {
             console.log("virag testing", res.status);
 

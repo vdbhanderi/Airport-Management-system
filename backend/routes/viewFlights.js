@@ -45,7 +45,7 @@ async function getUnassignerFlights() {
 }
 
 async function getUnassignerGates() {
-  var query = "SELECT gateNo FROM gate g where flightId is null or flightId = 0";
+  var query = "SELECT gateNo FROM gate g where (flightId is null or flightId = 0) and isEnable = 0";
   console.log("testing query", query);
 
   return new Promise((resolve, reject) => {

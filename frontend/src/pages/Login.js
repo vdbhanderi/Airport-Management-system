@@ -36,7 +36,7 @@ const useStyles = createTheme((theme) => ({
 
 const Login = () => {
   useEffect(() => {
-        if(userType != undefined){
+        if(localStorage.getItem('usertype') != undefined){
           window.location.href = '/ViewFlights';
       }
 },[]);

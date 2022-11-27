@@ -22,7 +22,7 @@ export default function AirlineFlights() {
     
         axios
             // .get("http://localhost:3001/view/fetchFlightsForAirline/?id=" + sessionStorage.getItem('airlineId'))
-            .get("http://localhost:3001/view/fetchFlightsForAirline/" + localStorage.getItem('airlineId'))
+            .get("http://localhost:3001/view/fetchFlightsForAirline/" + localStorage.getItem('airline'))
             .then((res) => {
                 console.log("virag",res.data.data);
                 setRows(res.data.data);

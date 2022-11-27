@@ -41,7 +41,7 @@ const LandingNavbar = (props) => {
                 <Button
                   variant='contained'
                   onClick={() => {
-                    history.push('/Login');
+                    history('/Login');
                   }}
                   style={{ marginRight: '20px' }}
                 >

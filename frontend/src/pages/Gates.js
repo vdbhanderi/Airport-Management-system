@@ -27,7 +27,8 @@ export default function Gates() {
 
             })
             setUserType(localStorage.getItem('usertype'));
-            if(userType == 'Customer' || userType == 'Airline'){
+            console.log("testing error", userType);
+            if(localStorage.getItem('usertype') == 'Customer' || userType == 'Airline'){
                 window.location.href = '/error';
             }
             if(userType== undefined){
