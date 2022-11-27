@@ -37,7 +37,7 @@ const Signup = () => {
 
         })
 
-        if(userType != undefined){
+        if(localStorage.getItem('usertype') != undefined){
           window.location.href = '/ViewFlights';
       }
 },[]);
