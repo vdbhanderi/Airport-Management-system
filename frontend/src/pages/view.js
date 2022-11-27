@@ -19,6 +19,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import axios from 'axios';
 import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
+import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
+import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
+import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
 
 import {
     Grid,
@@ -28,7 +31,10 @@ import {
     Button,
     FormControlLabel,
     FormControl,
-  } from '@mui/material';
+    MenuItem,
+    Select,
+    InputLabel,
+} from '@mui/material';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -94,23 +100,26 @@ TablePaginationActions.propTypes = {
 
 export default function CustomPaginationActionsTable() {
     const [page, setPage] = React.useState(0);
+    const [duration, setDuration] = React.useState(1);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [rows, setRows] = React.useState();
     const [flightType, setFlightType] = React.useState('');
+    const [userType, setUserType] = React.useState('');
 
     useEffect(() => {
-        console.log("virag");
         axios
-            .get("http://localhost:3001/view")
+            .get("http://localhost:3001/view/"+duration)
             .then((res) => {
                 console.log(res.data.data);
-                var data = res.data.data.filter(d=>d.destination == 'SFO');
+                var data = res.data.data.filter(d => d.destination == 'SFO');
                 console.log(res.data.data);
                 setRows(data);
-                setFlightType('Arrivals'); 
+                setFlightType('Arrivals');
 
             })
-    },[]);
+            setUserType(localStorage.getItem('usertype'));
+
+    }, []);
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -125,103 +134,159 @@ export default function CustomPaginationActionsTable() {
         setPage(0);
     };
 
-    const setFlightTypeByRows = async(e) => {
-        console.log(flightType);
-        setFlightType(e.target.value); 
+    const handleChange = async(e) => {
+        setDuration(e.target.value);
 
         await axios
-            .get("http://localhost:3001/view")
+            .get("http://localhost:3001/view/"+e.target.value)
             .then((res) => {
                 var flightsData = null;
-                if(e.target.value == 'Departures'){
-                    flightsData = res.data.data.filter(d=>d.destination != 'SFO');
+                if (flightType == 'Departures') {
+                    flightsData = res.data.data.filter(d => d.destination != 'SFO');
                 }
-                else{
-                    flightsData = res.data.data.filter(d=>d.destination == 'SFO');
+                else {
+                    flightsData = res.data.data.filter(d => d.destination == 'SFO');
                 }
                 console.log(flightsData);
                 setRows(flightsData);
-        })
-        
+            })
     };
-   
+
+    const setFlightTypeByRows = async (e) => {
+        console.log(flightType);
+        setFlightType(e.target.value);
+
+        await axios
+            .get("http://localhost:3001/view/"+duration)
+            .then((res) => {
+                var flightsData = null;
+                if (e.target.value == 'Departures') {
+                    flightsData = res.data.data.filter(d => d.destination != 'SFO');
+                }
+                else {
+                    flightsData = res.data.data.filter(d => d.destination == 'SFO');
+                }
+                console.log(flightsData);
+                setRows(flightsData);
+            })
+
+    };
+    
+
 
     return (
         <>
-        <LandingNavbar  />
-        <FormControl component="fieldset" style={{  marginTop:'150px' }}>
-              <RadioGroup row aria-label="Flight" name="row-radio-buttons-group" value={flightType} onChange={(e) => {setFlightTypeByRows(e)} }>
-                <FormControlLabel value="Departures" control={<Radio />} label="Departures"/>
-                <FormControlLabel value="Arrivals" control={<Radio />} label="Arrivals" />
-              </RadioGroup>
-            </FormControl>
-        
-        <TableContainer component={Paper} style={{ width: '80%', background: 'white', marginTop:'10px' ,  marginLeft:'100px', boxShadow:"5px 10px 20px 0 rgb(8 45 61 / 17%)"  }} >
-            <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
-                <TableHead style={{marginTop:'0px'}}>
-                    <TableRow style={{ background: '#001343' }}>
-                        <TableCell style={{ color: 'white' }}>Flight</TableCell>
-                        <TableCell style={{ color: 'white' }}>Source</TableCell>
-                        <TableCell style={{ color: 'white' }}>Destination</TableCell>
-                        <TableCell style={{ color: 'white' }}>Terminal</TableCell>
-                        <TableCell style={{ color: 'white' }}>Gate</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows ? (rowsPerPage > 0
-                        ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        : rows
-                    ).map((row,index) => (
-                        <TableRow key={row.name} style ={ index % 2? { background : "#f0f5f8" }:{ background : "white" }}>
-                            <TableCell component="th" scope="row">
-                                {row.flight_no}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }}>
-                                {row.source}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }}>
-                                {row.destination}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }}>
-                                {row.destination}
-                            </TableCell>
-                            <TableCell style={{ width: 160 }}>
-                                {row.destination}
-                            </TableCell>
-                        </TableRow>
-                    )) : ""}
+            <LandingNavbar />
+            {userType == undefined ? "":userType == 'Airline' ?  <ApplicationAirlineEmpNavbar/> : userType == 'Customer' ? <ApplicationCustomerNavbar/>: <ApplicationAirportEmpNavbar/>}
 
-                    {emptyRows > 0 && (
-                        <TableRow style={{ height: 53 * emptyRows }}>
-                            <TableCell colSpan={6} />
-                        </TableRow>
-                    )}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        {
-                            rows && (<TablePagination
-                                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                colSpan={3}
-                                count={rows.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: {
-                                        'aria-label': 'rows per page',
-                                    },
-                                    native: true,
-                                }}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />)
-                        }
+            <Grid
+                container
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                style={{ marginTop: '150px', background: 'white', marginLeft: '100px', marginRight: '100px', width: '80%', height: '70px' }}
+            > <FormControl component="fieldset" style={{ marginLeft: '20px' }}>
+                    <RadioGroup row aria-label="Flight" name="row-radio-buttons-group" value={flightType} onChange={(e) => { setFlightTypeByRows(e) }}>
+                        <FormControlLabel value="Departures" control={<Radio />} label="Departures" />
+                        <FormControlLabel value="Arrivals" control={<Radio />} label="Arrivals" />
+                    </RadioGroup>
+                </FormControl>
+                <FormControl style={{ marginRight: '20px', width: '200px' }}>
+                    <InputLabel id="demo-simple-select-label">Time Duration</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={duration}
+                        label="Time Duration"
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={1}>next hour</MenuItem>
+                        <MenuItem value={2}>next 2 hour</MenuItem>
+                        <MenuItem value={4}>next 4 hour</MenuItem>
+                    </Select>
+                </FormControl>
+            </Grid>
+            {/* <Box sx={{ width: '150px' }} style={{background:'white'}}>
+           
+               
+            </Box> */}
 
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
+            <TableContainer component={Paper} style={{ width: '80%', background: 'white', marginTop: '10px', marginLeft: '100px', boxShadow: "5px 10px 20px 0 rgb(8 45 61 / 17%)" }} >
+                <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+                    <TableHead style={{ marginTop: '0px' }}>
+                        <TableRow style={{ background: '#001343' }}>
+                            <TableCell style={{ color: 'white' }}>Flight</TableCell>
+                            <TableCell style={{ color: 'white' }}>Source</TableCell>
+                            <TableCell style={{ color: 'white' }}>Destination</TableCell>
+                            <TableCell style={{ color: 'white' }}>Departure</TableCell>
+                            <TableCell style={{ color: 'white' }}>Arrival</TableCell>
+                            <TableCell style={{ color: 'white' }}>Terminal</TableCell>
+                            <TableCell style={{ color: 'white' }}>Gate</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows ? (rowsPerPage > 0
+                            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : rows
+                        ).map((row, index) => (
+                            <TableRow key={row.flight_no} style={index % 2 ? { background: "#f0f5f8" } : { background: "white" }}>
+                                <TableCell component="th" scope="row">
+                                    {row.flight_no}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }}>
+                                    {row.source}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }}>
+                                    {row.destination}
+                                </TableCell>
+                                <TableCell style={{ width: 180 }}>
+                                    {new Date(row.departure_time).toLocaleDateString() +" "+ new Date(row.departure_time).toLocaleTimeString() }
+                                </TableCell>
+                                <TableCell style={{ width: 180 }}>
+                                    {new Date(row.arrival_time).toLocaleDateString() +" "+ new Date(row.arrival_time).toLocaleTimeString() }
+                                </TableCell>
+                                
+                                
+                                <TableCell style={{ width: 160 }}>
+                                    {row.terminalNo}
+                                </TableCell>
+                                <TableCell style={{ width: 160 }}>
+                                    {row.gateNo}
+                                </TableCell>
+                            </TableRow>
+                        )) : ""}
+
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 53 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            {
+                                rows && (<TablePagination
+                                    rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                                    colSpan={3}
+                                    count={rows.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    SelectProps={{
+                                        inputProps: {
+                                            'aria-label': 'rows per page',
+                                        },
+                                        native: true,
+                                    }}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                    ActionsComponent={TablePaginationActions}
+                                />)
+                            }
+
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
         </>
     );
 }

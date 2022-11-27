@@ -46,11 +46,20 @@ import '../LandingNavbar/LandingNavbar.css';
 // }));
 
 const menuItems = [
-  
   {
     listIcon: <FlightTakeoffIcon style={{ color: 'black' }} />,
     listText: 'Flights',
     listPath: '/ViewFlights'
+  },
+  {
+    listIcon: <PersonIcon style={{ color: 'black' }} />,
+    listText: 'Add Flight',
+    listPath: '/addFlight'
+  },
+  {
+    listIcon: <ConfirmationNumberIcon style={{ color: 'black' }} />,
+    listText: 'Update Flight',
+    listPath: '/AirlineFlights'
   },
   {
     listIcon: <LogoutIcon style={{ color: 'black' }} />,
@@ -59,7 +68,7 @@ const menuItems = [
   },
 ]
 
-const ApplicationCustomerEmpNavbar = (props) => {
+const ApplicationAirlineEmpNavbar = (props) => {
   // const classes = useStyles();
   const history = useNavigate();
   // const dispatch = useDispatch();
@@ -149,4 +158,4 @@ return (
 );
 };
 
-export default ApplicationCustomerEmpNavbar;
+export default ApplicationAirlineEmpNavbar;

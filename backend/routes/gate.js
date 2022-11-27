@@ -4,7 +4,7 @@ import db from "../utils/mysql_config.js";
 const router = express.Router();
 
 router.post('/updateGate', function(req, res, next) {
-  console.log(req);
+  console.log("gate Apiiiii",req);
   const { gateNo, isEnable } = req.body; 
 
    var sqlParams = [ isEnable, gateNo];
@@ -20,6 +20,7 @@ router.post('/updateGate', function(req, res, next) {
 });``
 
 router.get('/fetchGates', function(req, res, next) {
+    console.log("gate Apiiiii",req);
     db.query('SELECT * FROM gate', function (error, results, fields) {
         if (error) {
             console.log(error);

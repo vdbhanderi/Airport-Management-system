@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createStyles, createTheme } from '@mui/material';
-// import { useDispatch } from 'react-redux';
-// import { ColorButton4 } from '../constants/index'
-// import { userLogin } from '../state/action-creators/loginActions.js';
-// import { storeSearchParams, resetFlightData } from '../state/action-creators/flightActions';
-//import { employeeLogin, customerLogin } from '../state/action-creators/loginActions.js';
 import {
   Grid,
   TextField,
@@ -14,54 +8,58 @@ import {
   Button,
   FormControlLabel,
   FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
 import '../pages/styles.css';
-import { useTheme } from '@emotion/react';
+// import { useTheme } from '@emotion/react';
 import axios from 'axios';
 
 
-// CSS styles
-const useStyles = createTheme((theme) => ({
-  wrapper: {
-    background: 'white',
-    padding: '20px',
-    margin: '10px',
-    width: '40%',
-    [theme.breakpoints.down('sm')]: {
-      width: '95%',
-    },
-  }
-}));
-
-const Login = () => {
+const Signup = () => {
   // const classes = useStyles();
-  const [userType, setUserType] = useState('employee');
+  const [userType, setUserType] = useState('Customer');
   const [userId, setUserId] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [airlinesList, setairlinesList] = useState('');
+  const [airline, setAirline] = useState('');
   const history = useNavigate();
   // const dispatch = useDispatch();
+  useEffect(() => {
+    
+    axios
+        .get("http://localhost:3001/airline/fetchAirlines")
+        .then((res) => {
+            console.log("virag",res.data.data);
+            setairlinesList(res.data.data);
 
-  const handleOnChangeUserId = (event) => {
+        })
+},[]);
+
+  const handleOnChangeAirline = (event) => {
+    setAirline(event.target.value);
+  };
+  const handleOnChangeEmail = (event) => {
     setEmail(event.target.value);
   };
-
+  const handleOnChangeUserId = (event) => {
+    setUserId(event.target.value);
+  };
   const handleOnChangePassword = (event) => {
     setPassword(event.target.value);
   };
 
-  const onLogIn = () => {
-    // console.log(email);
-    // console.log(password);
+  const onSignUp = () => {
+    console.log(userType);
+    console.log(airline);
     axios
-    .post("http://localhost:3001/user/login",{password:password, email:email})
+    .post("http://localhost:3001/user/signUp",{password:password, userType : userType, email:email, airline_id:airline,username:userId})
     .then((res) => {
         if(res.status==200){
-            alert("user Login successfully");
-            localStorage.setItem("usertype",res.data.data.user_role);
-            localStorage.setItem("email",res.data.data.email);
-            localStorage.setItem("airline",res.data.data.airline_id);
+            alert("user crated successfully");
             console.log(res.data.data);
         }
         else if(res.status == 203){
@@ -72,6 +70,7 @@ const Login = () => {
       }
     })
    };
+
   return (  
     <div>
       <LandingNavbar  />
@@ -83,13 +82,25 @@ const Login = () => {
              width: '40%',
              
           }}>
-            {/* <FormControl component="fieldset">
+            <FormControl component="fieldset">
               <RadioGroup row aria-label="user" name="row-radio-buttons-group" value={userType} onChange={(e) => { setUserType(e.target.value); }}>
                 <FormControlLabel value="Customer" control={<Radio />} label="Customer" />
                 <FormControlLabel value="Airline" control={<Radio />} label="Airline Employee" />
                 <FormControlLabel value="Airport" control={<Radio />} label="AirPort Employee" />
               </RadioGroup>
-            </FormControl> */}
+            </FormControl>
+            <TextField
+              label='UserId'
+              variant="outlined"
+              placeholder="User Name"
+              fullWidth
+              required
+              value={userId}
+              onChange={(e) => {
+                handleOnChangeUserId(e);
+              }}
+              style={{margin:'20px auto', background:'white'}}
+            />
             <TextField
               label='Email'
               variant="outlined"
@@ -98,7 +109,7 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => {
-                handleOnChangeUserId(e);
+                handleOnChangeEmail(e);
               }}
               style={{margin:'20px auto', background:'white'}}
             />
@@ -115,18 +126,35 @@ const Login = () => {
               }}
               style={{margin:'20px auto', background:'white'}}
             />
+             {userType == 'Airline' &&<FormControl fullWidth style={{margin:'20px auto', background:'white'}}>
+                    <InputLabel id="demo-simple-select-label">AirLines </InputLabel>
+                    <Select
+                    
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={airline}
+                        label="AirLine"
+                        onChange={handleOnChangeAirline}
+                    >
+                       {airlinesList && airlinesList.map((row) => (
+                             <MenuItem value={row.airline_id}>{row.airline_name}</MenuItem>
+                        ))}
+                       
+                    </Select>
+                </FormControl>
+                }
             <Button
               variant='contained'
-              onClick={(e) => { onLogIn(e); }}
+              onClick={(e) => { onSignUp(e); }}
               style={{ height: '50px', alignSelf: 'center', width: '100%', marginBottom: '10px'}}
             >
-              Login
+              Signup
             </Button>
-            <a href="/Signup" className='loginAnchor'>New user? Register Here</a>
+            <a href="/login" className='loginAnchor'>Existing user? Login Here</a>
             </Grid>
           </div>
     </div>
   );
 };
 
-export default Login;
+export default Signup;

@@ -5,6 +5,9 @@ import cors from 'cors';
 import connectMongoDB from './utils/dbConnection.js';
 import flight from "./routes/viewFlights.js";
 import gate from "./routes/gate.js";
+import addupdate from "./routes/addupdateflight.js";
+import airline from "./routes/airline.js";
+import user from "./routes/user.js";
 
 // const mysql = require("mysql");
 import mysql from 'mysql';
@@ -54,6 +57,9 @@ app.get('/', (req, res) => {
 });
 app.use('/view',flight);
 app.use('/gate',gate);
+app.use('/flight',addupdate);
+app.use('/airline',airline);
+app.use('/user',user);
 // connectMongoDB();
 
 // const db = mongoose.connection; 

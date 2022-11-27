@@ -46,12 +46,18 @@ import '../LandingNavbar/LandingNavbar.css';
 // }));
 
 const menuItems = [
-  
+  {
+    listIcon: <LocalAirportIcon style={{ color: 'black' }} />,
+    listText: 'Gate Maintaince',
+    listPath: '/gate'
+  },
+
   {
     listIcon: <FlightTakeoffIcon style={{ color: 'black' }} />,
     listText: 'Flights',
     listPath: '/ViewFlights'
   },
+
   {
     listIcon: <LogoutIcon style={{ color: 'black' }} />,
     listText: 'Logout',
@@ -59,7 +65,7 @@ const menuItems = [
   },
 ]
 
-const ApplicationCustomerEmpNavbar = (props) => {
+const ApplicationAirportEmpNavbar = (props) => {
   // const classes = useStyles();
   const history = useNavigate();
   // const dispatch = useDispatch();
@@ -149,4 +155,4 @@ return (
 );
 };
 
-export default ApplicationCustomerEmpNavbar;
+export default ApplicationAirportEmpNavbar;
