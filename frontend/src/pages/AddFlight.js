@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import axios from 'axios';
 import {Alert, Stack} from '@mui/material';
+import Error from "./PageNotFound";
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
@@ -75,7 +76,14 @@ const AddFlight = () => {
         // setDOB(userProfileState.dob);
         // setEmail(userProfileState.email);
         // setPhone(userProfileState.phone);
+        
         setUserType(localStorage.getItem('usertype'));
+        if(userType == 'Customer' || userType == 'Airport'){
+            window.location.href = '/error';
+        }
+        if(userType== undefined){
+            window.location.href = '/login';
+        }
     }, [])
 
     const [rows, setRows] = useState([]);

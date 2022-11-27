@@ -22,14 +22,26 @@ router.post('/signup', function (req, res, next) {
 
       res.status(203).json({ msg: "User already exists" });
     }
-    else{
+    else {
       db.query(query, sqlParams, function (error, results, fields) {
         if (error) {
           console.log(error);
           return res.status(500).json({ msg: 'error' });
         } else {
           console.log(results);
-          res.status(200).json({ data: results });
+          var sqlParams = [email, password];
+          var serachForUser = "select * from user where email = ? and password = ?"
+          db.query(serachForUser, sqlParams, function (error, result, fields) {
+            if (error) {
+              console.log(error);
+              return res.status(500).json({ msg: 'Please try again later' });
+            }
+            else {
+              console.log("virag", result);
+              res.status(200).json({ data: result[0] });
+            }
+          });
+          // res.status(200).json({ data: results });
         }
       });
     }
@@ -37,13 +49,13 @@ router.post('/signup', function (req, res, next) {
   });
 
 
-  
+
 });
 
 router.post('/login', function (req, res, next) {
 
   console.log(req.body);
-  var {email , password} = req.body;
+  var { email, password } = req.body;
   var sqlParams = [email, password];
   var serachForFlightsExist = "select * from user where email = ? and password = ?"
   db.query(serachForFlightsExist, sqlParams, function (error, result, fields) {
@@ -51,12 +63,12 @@ router.post('/login', function (req, res, next) {
       console.log(error);
       return res.status(500).json({ msg: 'Please try again later' });
     }
-    else if(result.length == 0){
+    else if (result.length == 0) {
       return res.status(203).json({ msg: 'Either email or Password is invalid' });
     }
     else {
       console.log("virag", result);
-      res.status(200).json({data: result[0] });
+      res.status(200).json({ data: result[0] });
     }
   });
 

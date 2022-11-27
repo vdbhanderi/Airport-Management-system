@@ -10,6 +10,7 @@ import Gates from './pages/Gates.js';
 import AddFlight from './pages/AddFlight';
 import UpdateFlight from './pages/UpdateFlight';
 import AirlineFlights from './pages/AirlineFlights';
+import Error from './pages/PageNotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/error" element={<Error />} />
                 <Route path="/view" element={<ViewFlight />} />
                 <Route path="/AirlineFlights" element={<AirlineFlights />} />
                 <Route path="/ViewFlights" element={<TablePaginationActions />} />

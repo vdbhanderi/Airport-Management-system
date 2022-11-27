@@ -86,7 +86,10 @@ const ApplicationAirlineEmpNavbar = (props) => {
   const toggleSlider = (slider, open) => () => {
     setState({ ...state, [slider]: open });
   };
-
+  function logout(){
+    localStorage.clear();
+    window.location.href = '/ViewFlights';
+  }
   const sideList = slider => (
     <Box component='div'
       // className={classes.menuSliderContainer}
@@ -120,7 +123,8 @@ const ApplicationAirlineEmpNavbar = (props) => {
         {menuItems.map((listItem, key) => (
           <ListItem button key={key} component={Link} onClick={() => {
             if (listItem.listText === 'Logout') {
-              //   dispatch(logout(history));
+                logout();
+                //  dispatch(logout(history));
             } if (listItem.listText === 'Profile') {
               //   dispatch(getUserDetails(userDetails._id));
             }

@@ -101,6 +101,8 @@ const UpdateFlight = () => {
     return (
         <div>
             <LandingNavbar />
+            {userType == undefined ? "":userType == 'Airline' ?  <ApplicationAirlineEmpNavbar/> : userType == 'Customer' ? <ApplicationCustomerNavbar/>: <ApplicationAirportEmpNavbar/>}
+
             <div className="employeeProfile">
                 <Grid style={{
                     background: "white",

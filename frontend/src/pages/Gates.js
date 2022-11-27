@@ -27,12 +27,19 @@ export default function Gates() {
 
             })
             setUserType(localStorage.getItem('usertype'));
-
+            if(userType == 'Customer' || userType == 'Airline'){
+                window.location.href = '/error';
+            }
+            if(userType== undefined){
+                window.location.href = '/login';
+            }
     },[]);
 
     return (
         <>
             <LandingNavbar />
+            {userType == undefined ? "":userType == 'Airline' ?  <ApplicationAirlineEmpNavbar/> : userType == 'Customer' ? <ApplicationCustomerNavbar/>: <ApplicationAirportEmpNavbar/>}
+
             <TableContainer component={Paper} style={{ width: '80%', background: 'white', marginTop: '100px', marginLeft: '100px', boxShadow: "5px 10px 20px 0 rgb(8 45 61 / 17%)" }}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>

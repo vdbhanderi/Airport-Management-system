@@ -13,7 +13,7 @@ import './LandingNavbar.css';
 const LandingNavbar = (props) => {
   const history = useNavigate();
   useEffect(() => {
-
+   
   });
   return (
     <div>
@@ -50,7 +50,7 @@ const LandingNavbar = (props) => {
                 <Button
                   variant='contained'
                   onClick={() => {
-                    history.push('/Signup');
+                    history('/signup');
                   }}
                 >
                   Sign up

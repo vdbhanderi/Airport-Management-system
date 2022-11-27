@@ -29,7 +29,6 @@ const Signup = () => {
   const history = useNavigate();
   // const dispatch = useDispatch();
   useEffect(() => {
-    
     axios
         .get("http://localhost:3001/airline/fetchAirlines")
         .then((res) => {
@@ -37,6 +36,10 @@ const Signup = () => {
             setairlinesList(res.data.data);
 
         })
+
+        if(userType != undefined){
+          window.location.href = '/ViewFlights';
+      }
 },[]);
 
   const handleOnChangeAirline = (event) => {
@@ -59,8 +62,12 @@ const Signup = () => {
     .post("http://localhost:3001/user/signUp",{password:password, userType : userType, email:email, airline_id:airline,username:userId})
     .then((res) => {
         if(res.status==200){
+            localStorage.setItem("usertype",res.data.data.user_role);
+            localStorage.setItem("email",res.data.data.email);
+            localStorage.setItem("airline",res.data.data.airline_id);
             alert("user crated successfully");
             console.log(res.data.data);
+            window.location.href = '/ViewFlights';
         }
         else if(res.status == 203){
             alert(res.data.msg);

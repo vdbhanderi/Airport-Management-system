@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TableFooter from '@mui/material/TableFooter';
 import Paper from '@mui/material/Paper';
 import UpdateFlightRow from '../components/Flight/updateFlightRow';
 import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
@@ -29,7 +30,7 @@ export default function AirlineFlights() {
             })
             setUserType(localStorage.getItem('usertype'));
     },[]);
-
+    
     return (
         <>
             <LandingNavbar />
@@ -48,6 +49,15 @@ export default function AirlineFlights() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+                        {rows && rows.length == 0 ?
+                            <TableRow>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell>No Data</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>:""
+                        }
                         {rows && rows.map((row) => (
                             <UpdateFlightRow row={row} />
                         ))}

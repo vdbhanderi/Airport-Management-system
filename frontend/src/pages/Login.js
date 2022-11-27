@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createStyles, createTheme } from '@mui/material';
 // import { useDispatch } from 'react-redux';
@@ -35,6 +35,11 @@ const useStyles = createTheme((theme) => ({
 }));
 
 const Login = () => {
+  useEffect(() => {
+        if(userType != undefined){
+          window.location.href = '/ViewFlights';
+      }
+},[]);
   // const classes = useStyles();
   const [userType, setUserType] = useState('employee');
   const [userId, setUserId] = useState('');
