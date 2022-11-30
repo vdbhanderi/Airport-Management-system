@@ -18,7 +18,7 @@ router.post('/updateflight', function(req, res, next) {
             res.status(200).json({ data: results });  
           }
     });
-});``
+});
 
 router.post('/addFlight', function(req, res, next) {
 

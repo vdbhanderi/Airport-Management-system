@@ -78,7 +78,8 @@ const AddFlight = () => {
         // setPhone(userProfileState.phone);
         
         setUserType(localStorage.getItem('usertype'));
-        if(userType == 'Customer' || userType == 'Airport'){
+        console.log(userType);
+        if(localStorage.getItem('usertype') == 'Customer' || localStorage.getItem('usertype') == 'Airport'){
             window.location.href = '/error';
         }
         if(userType== undefined){
@@ -127,6 +128,7 @@ const AddFlight = () => {
             }
             else if(res.status == 200){
                 alert("Flight inserted successfully");
+                window.location.href = '/ViewFlights';
             }
             // console.log(res.data.data);
            
@@ -258,7 +260,7 @@ const AddFlight = () => {
                         />
                     </div>
 
-
+            
                     <Button
                         variant="contained"
                         style={{

@@ -12,6 +12,7 @@ import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -22,6 +23,8 @@ import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
+import ModalForm from "../components/Gate copy/modal";
+import Modal from '@mui/material/Modal';
 
 import {
     Grid,
@@ -36,7 +39,7 @@ import {
     InputLabel,
 } from '@mui/material';
 
-function TablePaginationActions(props) {
+function Baggage(props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -91,7 +94,7 @@ function TablePaginationActions(props) {
     );
 }
 
-TablePaginationActions.propTypes = {
+Baggage.propTypes = {
     count: PropTypes.number.isRequired,
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
@@ -99,19 +102,39 @@ TablePaginationActions.propTypes = {
 };
 
 export default function CustomPaginationActionsTable() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const [page, setPage] = React.useState(0);
     const [duration, setDuration] = React.useState(1);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [rows, setRows] = React.useState();
     const [flightType, setFlightType] = React.useState('');
     const [userType, setUserType] = React.useState('');
+    const [open, setOpen] = React.useState(false);
+    const [selectedRow, setSelectedRow] = React.useState();
+    const [baggageNo, setBaggageNo] = React.useState('');
+    const [listOfBaggageNos, setListOfBaggageNos] = React.useState([]);
+
+    const handleClose = () => setOpen(false);
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 600,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     useEffect(() => {
         axios
-            .get("http://localhost:3001/view/" + duration)
+            .get("http://localhost:3001/view/arrivalFlights")
             .then((res) => {
                 console.log(res.data.data);
-                var data = res.data.data.filter(d => d.destination == 'SFO');
+                var data = res.data.data;
                 console.log(res.data.data);
                 setRows(data);
                 setFlightType('Arrivals');
@@ -133,44 +156,45 @@ export default function CustomPaginationActionsTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+    const handleOpen = async (row) => {
+        // setPage(newPage);
+        console.log(row);
+        setSelectedRow(row);
+        setOpen(true);
+        await axios
+            .get("http://localhost:3001/baggage/fetchUnassignedBaggage")
+            .then((res) => {
+                console.log(res.data.data);
+                setListOfBaggageNos(res.data.data);
 
+            })
+
+    };
+    const updateBaggage = async(row) => {
+        console.log("virag testing", row);
+       await axios
+            .post("http://localhost:3001/baggage/updateCurouselNo", { flightId: row.id, carouselNumber: baggageNo })
+            .then((res) => {
+                console.log("virag testing", res.status);
+
+                if (res.status == 203) {
+                    console.log("virag testing", res.status);
+                    alert(res.data.msg);
+                }
+                else if (res.status == 200) {
+                    setBaggageNo("");
+                    setSelectedRow();
+                    window.location.href='/baggage';
+                    alert("Baggage curousel No inserted successfully");
+                }
+            });
+
+    };
     const handleChange = async (e) => {
-        setDuration(e.target.value);
-
-        await axios
-            .get("http://localhost:3001/view/" + e.target.value)
-            .then((res) => {
-                var flightsData = null;
-                if (flightType == 'Departures') {
-                    flightsData = res.data.data.filter(d => d.destination != 'SFO');
-                }
-                else {
-                    flightsData = res.data.data.filter(d => d.destination == 'SFO');
-                }
-                console.log(flightsData);
-                setRows(flightsData);
-            })
+        console.log(e.target.value);
+        setBaggageNo(e.target.value);
     };
 
-    const setFlightTypeByRows = async (e) => {
-        console.log(flightType);
-        setFlightType(e.target.value);
-
-        await axios
-            .get("http://localhost:3001/view/" + duration)
-            .then((res) => {
-                var flightsData = null;
-                if (e.target.value == 'Departures') {
-                    flightsData = res.data.data.filter(d => d.destination != 'SFO');
-                }
-                else {
-                    flightsData = res.data.data.filter(d => d.destination == 'SFO');
-                }
-                console.log(flightsData);
-                setRows(flightsData);
-            })
-
-    };
 
 
 
@@ -179,59 +203,18 @@ export default function CustomPaginationActionsTable() {
             <LandingNavbar />
             {userType == undefined ? "" : userType == 'Airline' ? <ApplicationAirlineEmpNavbar /> : userType == 'Customer' ? <ApplicationCustomerNavbar /> : <ApplicationAirportEmpNavbar />}
 
-            <Grid
-                container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                style={{ marginTop: '150px', background: 'white', marginLeft: '100px', marginRight: '100px', width: '80%', height: '70px' }}
-            > <FormControl component="fieldset" style={{ marginLeft: '20px' }}>
-                    <RadioGroup row aria-label="Flight" name="row-radio-buttons-group" value={flightType} onChange={(e) => { setFlightTypeByRows(e) }}>
-                        <FormControlLabel value="Departures" control={<Radio />} label="Departures" />
-                        <FormControlLabel value="Arrivals" control={<Radio />} label="Arrivals" />
-                    </RadioGroup>
-                </FormControl>
-                <FormControl style={{ marginRight: '20px', width: '200px' }}>
-                    <InputLabel id="demo-simple-select-label">Time Duration</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={duration}
-                        label="Time Duration"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value={1}>next hour</MenuItem>
-                        <MenuItem value={2}>next 2 hour</MenuItem>
-                        <MenuItem value={4}>next 4 hour</MenuItem>
-                    </Select>
-                </FormControl>
-            </Grid>
-            {/* <Box sx={{ width: '150px' }} style={{background:'white'}}>
-           
-               
-            </Box> */}
-
-            <TableContainer component={Paper} style={{ width: '80%', background: 'white', marginTop: '10px', marginLeft: '100px', boxShadow: "5px 10px 20px 0 rgb(8 45 61 / 17%)" }} >
+            <TableContainer component={Paper}
+                // style={{ marginTop: '150px', background: 'white', marginLeft: '100px', marginRight: '100px', width: '80%', height: '70px' }}
+                style={{ width: '80%', background: 'white', marginTop: '150px', marginLeft: '100px', marginLeft: '100px', marginRight: '100px', boxShadow: "5px 10px 20px 0 rgb(8 45 61 / 17%)" }} >
                 <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
                     <TableHead style={{ marginTop: '0px' }}>
                         <TableRow style={{ background: '#001343' }}>
                             <TableCell style={{ color: 'white' }}>Flight</TableCell>
-                            {
-                                flightType == 'Arrivals' ?
-                                    <TableCell style={{ color: 'white' }}>Arriving From</TableCell> :
-                                    <TableCell style={{ color: 'white' }}>Departing To</TableCell>
-
-                            }
-                            {/* <TableCell style={{ color: 'white' }}>Arriving From</TableCell> */}
-                            <TableCell style={{ color: 'white' }}>Departure</TableCell>
+                            <TableCell style={{ color: 'white' }}>Source</TableCell>
                             <TableCell style={{ color: 'white' }}>Arrival</TableCell>
                             <TableCell style={{ color: 'white' }}>Terminal</TableCell>
                             <TableCell style={{ color: 'white' }}>Gate</TableCell>
-                            {
-                                flightType == 'Arrivals' ?
-                                    <TableCell style={{ color: 'white' }}>Baggage Claim</TableCell> :
-                                    ""
-                            }
+                            <TableCell style={{ color: 'white' }}>Assign Baggage Carousel</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -243,29 +226,12 @@ export default function CustomPaginationActionsTable() {
                                 <TableCell component="th" scope="row">
                                     {row.flight_no}
                                 </TableCell>
-                                {/* <TableCell style={{ width: 160 }}>
-                                    {row.source}
-                                </TableCell>
                                 <TableCell style={{ width: 160 }}>
-                                    {row.destination}
-                                </TableCell> */}
-                                {
-                                    flightType == 'Arrivals' ?
-                                        <TableCell style={{ width: 160 }}>
-                                            {row.source}
-                                        </TableCell> :
-                                        <TableCell style={{ width: 160 }}>
-                                            {row.destination}
-                                        </TableCell>
-
-                                }
-                                <TableCell style={{ width: 180 }}>
-                                    {new Date(row.departure_time).toLocaleDateString() + " " + new Date(row.departure_time).toLocaleTimeString()}
+                                    {row.source}
                                 </TableCell>
                                 <TableCell style={{ width: 180 }}>
                                     {new Date(row.arrival_time).toLocaleDateString() + " " + new Date(row.arrival_time).toLocaleTimeString()}
                                 </TableCell>
-
 
                                 <TableCell style={{ width: 160 }}>
                                     {row.terminalNo}
@@ -273,13 +239,9 @@ export default function CustomPaginationActionsTable() {
                                 <TableCell style={{ width: 160 }}>
                                     {row.gateNo}
                                 </TableCell>
-                                {
-                                    flightType == 'Arrivals' ?
-                                        <TableCell style={{ width: 160 }}>
-                                            {row.carouselNumber}
-                                        </TableCell> :
-                                        ""
-                                }
+                                <TableCell style={{ width: 160 }}>
+                                    <Button onClick={() => handleOpen(row)}>Assign</Button>
+                                </TableCell>
                             </TableRow>
                         )) : ""}
 
@@ -306,7 +268,7 @@ export default function CustomPaginationActionsTable() {
                                     }}
                                     onPageChange={handleChangePage}
                                     onRowsPerPageChange={handleChangeRowsPerPage}
-                                    ActionsComponent={TablePaginationActions}
+                                    ActionsComponent={Baggage}
                                 />)
                             }
 
@@ -314,6 +276,81 @@ export default function CustomPaginationActionsTable() {
                     </TableFooter>
                 </Table>
             </TableContainer>
+            {/* <ModalForm open={open} onClose={handleClose}> </ModalForm> */}
+
+            {
+                selectedRow &&
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box sx={style} >
+                        <Grid style={{
+                            background: 'white',
+                            padding: '20px',
+                            margin: '10px',
+
+
+                        }}>
+                            <Typography variant="h5" gutterBottom style={{ marginLeft: "100px" }}>
+                                Assign Baggage Curousel No
+                            </Typography>
+                            <TextField
+                                label='Flight No'
+                                variant="outlined"
+                                placeholder="Flight No"
+
+                                disabled
+                                value={selectedRow.flight_no}
+                                style={{ margin: '20px auto', background: 'white' }}
+                            />
+                            <TextField
+                                label='Arrival Time'
+                                variant="outlined"
+                                disabled
+                                placeholder='Enter password'
+                                value={new Date(selectedRow.arrival_time).toTimeString()}
+                                style={{ margin: '20px auto', background: 'white', paddingLeft: '10px' }}
+                            />
+                            <TextField
+                                label='Gate No'
+                                disabled
+                                variant="outlined"
+                                placeholder='Enter password'
+
+                                value={selectedRow.gateNo}
+                                style={{ margin: '20px auto', background: 'white' }}
+                            />
+                           
+                            <FormControl 
+                             style={{ margin: '20px auto', background: 'white', paddingLeft: '10px', width:'195px' }}
+                             >
+                                <InputLabel id="demo-simple-select-autowidth-label">Curousel No</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-autowidth-label"
+                                    id="demo-simple-select-autowidth"
+                                    value={baggageNo}
+                                    onChange={handleChange}
+
+                                    label="Curousel No"
+                                >
+                                    {listOfBaggageNos.map((item) =>
+                                        <MenuItem key={item.carouselNumber} value={item.carouselNumber}>{item.carouselNumber}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                            <Button
+                                variant='contained'
+                                onClick={() => { updateBaggage(selectedRow); }}
+                                style={{ height: '50px', alignSelf: 'center', width: '100%', marginBottom: '10px' }}
+                            >
+                                Update
+                            </Button>
+                        </Grid>
+                    </Box>
+                </Modal>}
         </>
     );
 }

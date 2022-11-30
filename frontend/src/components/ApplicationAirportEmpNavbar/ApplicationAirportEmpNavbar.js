@@ -19,7 +19,9 @@ import DehazeIcon from '@mui/icons-material/Dehaze';
 import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
+import EngineeringIcon from '@mui/icons-material/Engineering';
 import PersonIcon from '@mui/icons-material/Person';
+import CasesOutlinedIcon from '@mui/icons-material/CasesOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from '../../images/icon.svg';
 import '../LandingNavbar/LandingNavbar.css';
@@ -47,7 +49,7 @@ import '../LandingNavbar/LandingNavbar.css';
 
 const menuItems = [
   {
-    listIcon: <LocalAirportIcon style={{ color: 'black' }} />,
+    listIcon: <EngineeringIcon style={{ color: 'black' }} />,
     listText: 'Gate Maintaince',
     listPath: '/gate'
   },
@@ -57,7 +59,11 @@ const menuItems = [
     listText: 'Flights',
     listPath: '/ViewFlights'
   },
-
+  {
+    listIcon: <CasesOutlinedIcon style={{ color: 'black' }} />,
+    listText: 'Assign Baggage Carousel number',
+    listPath: '/baggage'
+  },
   {
     listIcon: <LogoutIcon style={{ color: 'black' }} />,
     listText: 'Logout',
@@ -71,9 +77,7 @@ const ApplicationAirportEmpNavbar = (props) => {
   // const dispatch = useDispatch();
   const userDetails = localStorage.getItem('userDetails');//useSelector((state) => state.login.userDetails.data);
   useEffect(() => {
-    // if (Object.keys(userDetails).length > 0) {
-    //     dispatch(getBookings(userDetails._id));
-    // }
+    
   }, [userDetails])
 
   const [state, setState] = useState({

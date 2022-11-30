@@ -8,6 +8,7 @@ import gate from "./routes/gate.js";
 import addupdate from "./routes/addupdateflight.js";
 import airline from "./routes/airline.js";
 import user from "./routes/user.js";
+import baggage from "./routes/baggage.js";
 
 // const mysql = require("mysql");
 import mysql from 'mysql';
@@ -60,6 +61,7 @@ app.use('/gate',gate);
 app.use('/flight',addupdate);
 app.use('/airline',airline);
 app.use('/user',user);
+app.use('/baggage',baggage);
 // connectMongoDB();
 
 // const db = mongoose.connection; 

@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ViewFlight from './pages/ViewFlights';
 import TablePaginationActions from './pages/view';
 import Gates from './pages/Gates.js';
+import Baggage from './pages/Baggage.js';
 import AddFlight from './pages/AddFlight';
 import UpdateFlight from './pages/UpdateFlight';
 import AirlineFlights from './pages/AirlineFlights';
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/error" element={<Error />} />
                 <Route path="/view" element={<ViewFlight />} />
+                <Route path="/baggage" element={<Baggage />} />
                 <Route path="/AirlineFlights" element={<AirlineFlights />} />
                 <Route path="/ViewFlights" element={<TablePaginationActions />} />
                 <Route path="/gate" element={<Gates />} />

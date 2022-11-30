@@ -21,6 +21,8 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import UpdateIcon from '@mui/icons-material/Update';
+
 import logo from '../../images/icon.svg';
 import '../LandingNavbar/LandingNavbar.css';
 
@@ -57,7 +59,7 @@ const menuItems = [
     listPath: '/addFlight'
   },
   {
-    listIcon: <ConfirmationNumberIcon style={{ color: 'black' }} />,
+    listIcon: <UpdateIcon style={{ color: 'black' }} />,
     listText: 'Update Flight',
     listPath: '/AirlineFlights'
   },

@@ -21,6 +21,24 @@ const router = express.Router();
 //           }
 //     });
 // }
+router.get('/arrivalFlights', async function (req, res, next) {
+
+  var now = dayjs(Date.now()).subtract(8, 'hour');
+  console.log("fli", now.toISOString());
+  // console.log("fli",new Date(Date.now()).toISOString());
+  var query = "SELECT f.*, g.gateNo, g.terminalNo,b.carouselNumber FROM flight f left join gate g on f.id = g.flightId left join baggage b on b.flightId= f.id  where arrival_time between '" + now.toISOString() + "' and '" + new Date(now + 1 * 60 * 60 * 1000).toISOString() + "' and (b.carouselNumber is Null or b.carouselNumber = 0 )";
+  console.log("testing query", query);
+
+  db.query(query, function (error, results, fields) {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ msg: 'error' });
+    } else {
+      console.log(results);
+      res.status(200).json({ data: results });
+    }
+  });
+});
 
 async function getUnassignerFlights() {
   var now = dayjs(Date.now()).subtract(8, 'hour');
@@ -131,7 +149,7 @@ router.get('/:duration1', async function (req, res, next) {
   var now = dayjs(Date.now()).subtract(8, 'hour');
   console.log("fli", now.toISOString());
   // console.log("fli",new Date(Date.now()).toISOString());
-  var query = "SELECT *, g.gateNo FROM flight f left join gate g on f.id = g.flightId where departure_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'" + " or arrival_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'";
+  var query = "SELECT *, g.gateNo,b.carouselNumber FROM flight f left join gate g on f.id = g.flightId  left join baggage b on  f.id = b.flightId where departure_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'" + " or arrival_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'";
   console.log("testing query", query);
 
   db.query(query, function (error, results, fields) {
