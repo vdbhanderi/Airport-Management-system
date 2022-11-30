@@ -216,6 +216,7 @@ export default function CustomPaginationActionsTable() {
                     <TableHead style={{ marginTop: '0px' }}>
                         <TableRow style={{ background: '#001343' }}>
                             <TableCell style={{ color: 'white' }}>Flight</TableCell>
+                            <TableCell style={{ color: 'white',minWidth:'80px' }}>Airline</TableCell>
                             {
                                 flightType == 'Arrivals' ?
                                     <TableCell style={{ color: 'white' }}>Arriving From</TableCell> :
@@ -225,8 +226,8 @@ export default function CustomPaginationActionsTable() {
                             {/* <TableCell style={{ color: 'white' }}>Arriving From</TableCell> */}
                             <TableCell style={{ color: 'white' }}>Departure</TableCell>
                             <TableCell style={{ color: 'white' }}>Arrival</TableCell>
-                            <TableCell style={{ color: 'white' }}>Terminal</TableCell>
-                            <TableCell style={{ color: 'white' }}>Gate</TableCell>
+                            <TableCell style={{ color: 'white',maxWidth:'80px' }}>Terminal</TableCell>
+                            <TableCell style={{ color: 'white',maxWidth:'30px' }}>Gate</TableCell>
                             {
                                 flightType == 'Arrivals' ?
                                     <TableCell style={{ color: 'white' }}>Baggage Claim</TableCell> :
@@ -242,6 +243,9 @@ export default function CustomPaginationActionsTable() {
                             <TableRow key={row.flight_no} style={index % 2 ? { background: "#f0f5f8" } : { background: "white" }}>
                                 <TableCell component="th" scope="row">
                                     {row.flight_no}
+                                </TableCell>
+                                <TableCell component="th" scope="row">
+                                    {row.airline_name}
                                 </TableCell>
                                 {/* <TableCell style={{ width: 160 }}>
                                     {row.source}

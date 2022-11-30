@@ -149,7 +149,7 @@ router.get('/:duration1', async function (req, res, next) {
   var now = dayjs(Date.now()).subtract(8, 'hour');
   console.log("fli", now.toISOString());
   // console.log("fli",new Date(Date.now()).toISOString());
-  var query = "SELECT *, g.gateNo,b.carouselNumber FROM flight f left join gate g on f.id = g.flightId  left join baggage b on  f.id = b.flightId where departure_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'" + " or arrival_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'";
+  var query = "SELECT *, g.gateNo,b.carouselNumber,a.airline_name FROM flight f left join gate g on f.id = g.flightId  left join baggage b on  f.id = b.flightId left join  airline a on  f.airline_id = a.airline_id  where departure_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'" + " or arrival_time between '" + now.toISOString() + "' and '" + new Date(now + duration * 60 * 60 * 1000).toISOString() + "'";
   console.log("testing query", query);
 
   db.query(query, function (error, results, fields) {

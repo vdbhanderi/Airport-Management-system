@@ -68,6 +68,7 @@ const Login = () => {
             localStorage.setItem("email",res.data.data.email);
             localStorage.setItem("airline",res.data.data.airline_id);
             console.log(res.data.data);
+            window.location.href='/ViewFlights';
         }
         else if(res.status == 203){
             alert(res.data.msg);
