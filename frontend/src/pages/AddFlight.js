@@ -82,7 +82,7 @@ const AddFlight = () => {
         if(localStorage.getItem('usertype') == 'Customer' || localStorage.getItem('usertype') == 'Airport'){
             window.location.href = '/error';
         }
-        if(userType== undefined){
+        if(localStorage.getItem('usertype') == '' || localStorage.getItem('usertype')== undefined){
             window.location.href = '/login';
         }
     }, [])
@@ -114,34 +114,49 @@ const AddFlight = () => {
        
         console.log(source);
         console.log(flightNo);
-        console.log(typeof arrival);
-        console.log(departure);
+        console.log(dayjs(departure));
+        // console.log(new Date(departure).to());
+        if(source.trim() == '' ){
+            alert("Source is required");
+        }
+        else if(destination.trim() == ''){
+            alert("Destination is required");
+        }
+        else if(flightNo.trim() == ''){
+            alert("Flight No is required");
+        }
+        // else if(dayjs(departure).isBefore(dayjs(arrival))){
 
-        axios
-        .post("http://localhost:3001/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : localStorage.getItem('airline'), departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
-        .then((res) => {
-            console.log("virag testing", res.status);
-
-            if(res.status == 203){
-                console.log("virag testing", res.status);
-                alert(res.data.msg);
-            }
-            else if(res.status == 200){
-                alert("Flight inserted successfully");
-                window.location.href = '/ViewFlights';
-            }
-            // console.log(res.data.data);
-           
-
-        // })
-        // if(validateEmail(email) && ValidateDOB(dob)) {
-        //   dispatch(updateProfile(userProfile, userDetails.data._id));
-        //     setOpen(true);
-        //     setTimeout(()=>{
-        //       setOpen(false);
-        //     }, 2000)
+        //     alert("Departure can not be grater than Arrivals");
         // }
-    })};
+        else{
+            axios
+            .post("http://localhost:3001/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : localStorage.getItem('airline'), departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
+            .then((res) => {
+                console.log("virag testing", res.status);
+    
+                if(res.status == 203){
+                    console.log("virag testing", res.status);
+                    alert(res.data.msg);
+                }
+                else if(res.status == 200){
+                    alert("Flight inserted successfully");
+                    window.location.href = '/ViewFlights';
+                }
+                // console.log(res.data.data);
+               
+    
+            // })
+            // if(validateEmail(email) && ValidateDOB(dob)) {
+            //   dispatch(updateProfile(userProfile, userDetails.data._id));
+            //     setOpen(true);
+            //     setTimeout(()=>{
+            //       setOpen(false);
+            //     }, 2000)
+            // }
+        })
+        }
+      };
 
 
 
