@@ -2,19 +2,14 @@
 
 ## Communication
 
-One of our team's greatest assets was its ability to communicate. We believed that face to face conversation is the best communication. 
-So, for the important meetings as a team we sit together in the same space without barriers to communication. 
-And also our team held scrum meetings every week on Wednesday and Saturday. 
-We discussed our progress and dealt with dependence concerns and other roadblocks during the call. To keep track of our user stories and manage the project, 
-we used Project Dashboard.This allowed us to track the progress of several tasks during the sprint. We chose to take on responsibilities 
-based on our unique strengths and to aid each other by interacting on a regular basis through Zoom meetings. Any problems or 
-issues were routinely discussed during the meetings.
+Our team's capacity for communication was one of its greatest strengths. The best kind of communication, in our view, is face-to-face communication.
+As a consequence, we all sit one on one in same room for the crucial sessions, removing any barriers to communication.
+Additionally, on Mondays and Tuesdays of every week, our team held scrum meetings.During the call, we spoke about our progress and dealt with issues with dependency and other obstacles. In order to oversee the project and keep track of our user stories,we used Project Dashboard - Jira .This allowed us to track the progress of several tasks during the sprint. We decided to take on duties based on our individual strengths and to support one another by collaborating frequently via Google Meet meetings. During the meetings, any issues or problems were routinely aired.
 
 ## Simplicity
 
-We used a critical eye to determine the most important aspects of the project scope and only did what was required. 
-As we introduced new APIs and matching UI components, actively striving to eliminate duplications helped us keep our code simple to maintain. 
-We made sure that the names of all classes, methods, and variables were explicit and disclosed the goal.
+The most crucial components of the scope of the project were identified using a critical eye, and we only finished the necessary tasks.
+We actively worked to remove duplications when we introduced additional APIs and corresponding UI components, which helped us keep our code easy to maintain.We ensured that all class names, method names, and local variables were unambiguous and indicated the objective.
 
 ## Feedback
 
