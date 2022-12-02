@@ -40,8 +40,8 @@ Sprint 4: 03/28/2022 - 04/03/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Helped in designing view flight page.
-                - Designed and created database.
-                - helped in creating APIs in nodejs.
+		- Designed and created database.
+                - Helped in creating APIs in nodejs.
 	- What am I planning to work on next?
                 - Test pages with appropriate request and response.
 	- What tasks are blocked waiting on another team member?
@@ -52,9 +52,9 @@ Sprint 4: 03/28/2022 - 04/03/2022
 Sprint 5: 04/04/2022 - 04/10/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
-		- Used different Ant Design components.
-	    	- Worked on Database - SQL queries and database changes.
-    		- Worked on backend- gate service, parsing service and terminal service.
+		- Used different and Design components.
+		- Worked on Database - SQL queries and database changes.
+		- Worked on backend- gate service, parsing service and terminal service.
 	- What am I planning to work on next?
 		- Check all functionalities in working envirom=nment.
 	- What tasks are blocked waiting on another team member?
