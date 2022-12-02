@@ -1,4 +1,4 @@
-Sprint 1: 03/07/2022 - 03/13/2022
+Sprint 1: 10/02/2022 - 10/08/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Participated in setting up the initail project structure and GitHub environment
@@ -11,7 +11,7 @@ Sprint 1: 03/07/2022 - 03/13/2022
 
 
 
-Sprint 2: 03/14/2022 - 03/20/2022
+Sprint 2: 10/09/2022 - 10/15/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Create various tables in MySQL
@@ -24,7 +24,7 @@ Sprint 2: 03/14/2022 - 03/20/2022
 		- None
 
 
-Sprint 3: 03/21/2022 - 03/27/2022
+Sprint 3: 10/16/2022 - 10/22/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Added values for all the tables in the database
@@ -36,7 +36,7 @@ Sprint 3: 03/21/2022 - 03/27/2022
 		- None
  
 
-Sprint 4: 03/28/2022 - 04/03/2022
+Sprint 4: 10/23/2022 - 10/29/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed designing table for the 'Update Flight' page.
@@ -48,7 +48,7 @@ Sprint 4: 03/28/2022 - 04/03/2022
 		- None
 
 
-Sprint 5: 04/04/2022 - 04/10/2022
+Sprint 5: 10/30/2022 - 11/05/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed integration of all the pages I made.
@@ -63,7 +63,7 @@ Sprint 5: 04/04/2022 - 04/10/2022
 
 
 
-Sprint 6: 04/11/2022 - 04/17/2022
+Sprint 6: 11/06/2022 - 11/12/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Stated deploying the integrated project on ec2 instance.
@@ -75,7 +75,7 @@ Sprint 6: 04/11/2022 - 04/17/2022
 		- None
 
 
-Sprint 7: 04/18/2022 - 04/24/2022
+Sprint 7: 11/13/2022 - 11/19/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Deploying on AWS ec2
@@ -87,7 +87,7 @@ Sprint 7: 04/18/2022 - 04/24/2022
 
 
 
-Sprint 8: 04/25/2022 - 04/01/2022
+Sprint 8: 11/20/2022 - 11/26/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed Unit and Integration testing of application.
