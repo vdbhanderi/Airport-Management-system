@@ -1,4 +1,4 @@
-Sprint 1: 03/07/2022 - 03/13/2022
+Sprint 1: 10/02/2022 - 10/08/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		-  Actively took part in Reruirement Gathering
@@ -10,7 +10,7 @@ Sprint 1: 03/07/2022 - 03/13/2022
 		-  None
 
 
-Sprint 2: 03/14/2022 - 03/20/2022
+Sprint 2: 10/09/2022 - 10/15/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Brushed up on basic concepts and learned React JS and Material UI library for designing frontend components.
@@ -23,7 +23,7 @@ Sprint 2: 03/14/2022 - 03/20/2022
 		- None
 
 
-Sprint 3: 03/21/2022 - 03/27/2022
+Sprint 3: 10/16/2022 - 10/22/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed the UI for Login/SignUp page for the customer
@@ -36,7 +36,7 @@ Sprint 3: 03/21/2022 - 03/27/2022
 		- None
  
 
-Sprint 4: 03/28/2022 - 04/03/2022
+Sprint 4: 10/23/2022 - 10/29/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Designed 'Add/Update Flight' page
@@ -50,7 +50,7 @@ Sprint 4: 03/28/2022 - 04/03/2022
 
 
 
-Sprint 5: 04/04/2022 - 04/10/2022
+Sprint 5: 10/30/2022 - 11/05/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Testing pages with different user input.
@@ -64,7 +64,7 @@ Sprint 5: 04/04/2022 - 04/10/2022
 	
 
 
-Sprint 6: 04/11/2022 - 04/17/2022
+Sprint 6: 11/04/2022 - 11/17/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed working on 'Assign Baggage' Page and added different tabs to it.
@@ -77,7 +77,7 @@ Sprint 6: 04/11/2022 - 04/17/2022
 
 
 
-Sprint 7: 04/18/2022 - 04/24/2022
+Sprint 7: 11/13/2022 - 11/19/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Testing all the pages 
@@ -90,7 +90,7 @@ Sprint 7: 04/18/2022 - 04/24/2022
 
 
 
-Sprint 8: 04/25/2022 - 04/01/2022
+Sprint 8: 11/20/2022 - 11/26/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Completed end to end testing of application.
