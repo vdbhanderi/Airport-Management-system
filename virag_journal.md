@@ -52,8 +52,8 @@ Sprint 5: 04/04/2022 - 04/10/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Designed assign baggage page.
-    		- Helped in backend - carousal routes and baggage routes.
-                - Helped in designing Assign baggage page.
+		- Helped in backend - carousal routes and baggage routes.
+		- Helped in designing Assign baggage page.
 	- What am I planning to work on next?
 		- Validate pages and components and design gate maintainance page. 
 	- What tasks are blocked waiting on another team member?
@@ -64,7 +64,7 @@ Sprint 6: 04/11/2022 - 04/17/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Design gate maintainance page(enable/disable gate)
-		- Helped in backend - password hashing
+		- Helped in backend and password hashing
 		- Helped in styling.
 	- What am I planning to work on next?
 		- Work on deployment and review all integration.
