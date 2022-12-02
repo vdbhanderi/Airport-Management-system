@@ -16,6 +16,7 @@ import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
 import '../pages/styles.css';
 // import { useTheme } from '@emotion/react';
 import axios from 'axios';
+import server from '../Config';
 
 
 const Signup = () => {
@@ -30,7 +31,7 @@ const Signup = () => {
   // const dispatch = useDispatch();
   useEffect(() => {
     axios
-        .get("http://localhost:3001/airline/fetchAirlines")
+        .get(server+"/airline/fetchAirlines")
         .then((res) => {
             console.log("virag",res.data.data);
             setairlinesList(res.data.data);
@@ -59,7 +60,7 @@ const Signup = () => {
     console.log(userType);
     console.log(airline);
     axios
-    .post("http://localhost:3001/user/signUp",{password:password, userType : userType, email:email, airline_id:airline,username:userId})
+    .post(server+"/user/signUp",{password:password, userType : userType, email:email, airline_id:airline,username:userId})
     .then((res) => {
         if(res.status==200){
             localStorage.setItem("usertype",res.data.data.user_role);

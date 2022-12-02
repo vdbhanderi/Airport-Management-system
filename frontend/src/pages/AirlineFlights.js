@@ -14,6 +14,7 @@ import axios from 'axios';
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
+import server from '../Config';
 
 export default function AirlineFlights() {
     const [userType, setUserType] = React.useState('');
@@ -21,8 +22,8 @@ export default function AirlineFlights() {
     useEffect(() => {
     
         axios
-            // .get("http://localhost:3001/view/fetchFlightsForAirline/?id=" + sessionStorage.getItem('airlineId'))
-            .get("http://localhost:3001/view/fetchFlightsForAirline/" + localStorage.getItem('airline'))
+            // .get("server/view/fetchFlightsForAirline/?id=" + sessionStorage.getItem('airlineId'))
+            .get(server+"/view/fetchFlightsForAirline/" + localStorage.getItem('airline'))
             .then((res) => {
                 console.log("virag",res.data.data);
                 setRows(res.data.data);

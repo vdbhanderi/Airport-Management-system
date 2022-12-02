@@ -18,6 +18,7 @@ import Error from "./PageNotFound";
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
+import server from "../Config";
 
 
 const AddFlight = () => {
@@ -125,13 +126,17 @@ const AddFlight = () => {
         else if(flightNo.trim() == ''){
             alert("Flight No is required");
         }
+        else if(source.trim() != 'SFO' && destination.trim()!='SFO'){
+            alert("Either Source or Destination should be SFO.");
+        }
+
         // else if(dayjs(departure).isBefore(dayjs(arrival))){
 
         //     alert("Departure can not be grater than Arrivals");
         // }
         else{
             axios
-            .post("http://localhost:3001/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : localStorage.getItem('airline'), departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
+            .post(server+"/flight/addFlight",{flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : localStorage.getItem('airline'), departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
             .then((res) => {
                 console.log("virag testing", res.status);
     

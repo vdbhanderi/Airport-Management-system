@@ -19,6 +19,7 @@ import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
 import '../pages/styles.css';
 import { useTheme } from '@emotion/react';
 import axios from 'axios';
+import server from '../Config';
 
 
 // CSS styles
@@ -60,7 +61,7 @@ const Login = () => {
     // console.log(email);
     // console.log(password);
     axios
-    .post("http://localhost:3001/user/login",{password:password, email:email})
+    .post(server+"/user/login",{password:password, email:email})
     .then((res) => {
         if(res.status==200){
             alert("user Login successfully");

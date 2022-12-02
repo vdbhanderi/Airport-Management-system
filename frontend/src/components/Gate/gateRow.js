@@ -3,6 +3,7 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Switch from '@mui/material/Switch';
 import axios from 'axios';
+import server from '../../Config';
 
 const GateRow = (props) => {
 //   const history = useNavigate();
@@ -11,7 +12,7 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 function handleGate(e){
    setChecked(e.target.checked);
    axios
-   .post("http://localhost:3001/gate/updateGate",{gateNo : props.row.gateNo, isEnable : e.target.checked })
+   .post(server+"/gate/updateGate",{gateNo : props.row.gateNo, isEnable : e.target.checked })
    .then((res) => {
        
        console.log(res.data.data);

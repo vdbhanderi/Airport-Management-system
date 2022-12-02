@@ -13,6 +13,7 @@ import axios from 'axios';
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
+import server from '../Config.js';
 
 export default function Gates() {
     const [userType, setUserType] = React.useState('');
@@ -20,7 +21,7 @@ export default function Gates() {
     useEffect(() => {
         console.log("gate");
         axios
-            .get("http://localhost:3001/gate/fetchGates")
+            .get(server+"/gate/fetchGates")
             .then((res) => {
                 console.log(res.data.data);
                 setRows(res.data.data);

@@ -35,6 +35,7 @@ import {
     Select,
     InputLabel,
 } from '@mui/material';
+import server from '../Config';
 
 function TablePaginationActions(props) {
     const theme = useTheme();
@@ -108,7 +109,7 @@ export default function CustomPaginationActionsTable() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3001/view/" + duration)
+            .get(server+"/view/" + duration)
             .then((res) => {
                 console.log(res.data.data);
                 var data = res.data.data.filter(d => d.destination == 'SFO');
@@ -138,7 +139,7 @@ export default function CustomPaginationActionsTable() {
         setDuration(e.target.value);
 
         await axios
-            .get("http://localhost:3001/view/" + e.target.value)
+            .get(server+"/view/" + e.target.value)
             .then((res) => {
                 var flightsData = null;
                 if (flightType == 'Departures') {
@@ -157,7 +158,7 @@ export default function CustomPaginationActionsTable() {
         setFlightType(e.target.value);
 
         await axios
-            .get("http://localhost:3001/view/" + duration)
+            .get(server+"/view/" + duration)
             .then((res) => {
                 var flightsData = null;
                 if (e.target.value == 'Departures') {

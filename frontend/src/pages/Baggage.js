@@ -38,6 +38,7 @@ import {
     Select,
     InputLabel,
 } from '@mui/material';
+import server from '../Config';
 
 function Baggage(props) {
     const theme = useTheme();
@@ -131,7 +132,7 @@ export default function CustomPaginationActionsTable() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3001/view/arrivalFlights")
+            .get(server+"/view/arrivalFlights")
             .then((res) => {
                 console.log(res.data.data);
                 var data = res.data.data;
@@ -162,7 +163,7 @@ export default function CustomPaginationActionsTable() {
         setSelectedRow(row);
         setOpen(true);
         await axios
-            .get("http://localhost:3001/baggage/fetchUnassignedBaggage")
+            .get(server+"/baggage/fetchUnassignedBaggage")
             .then((res) => {
                 console.log(res.data.data);
                 setListOfBaggageNos(res.data.data);
@@ -173,7 +174,7 @@ export default function CustomPaginationActionsTable() {
     const updateBaggage = async(row) => {
         console.log("virag testing", row);
        await axios
-            .post("http://localhost:3001/baggage/updateCurouselNo", { flightId: row.id, carouselNumber: baggageNo })
+            .post(server+"/baggage/updateCurouselNo", { flightId: row.id, carouselNumber: baggageNo })
             .then((res) => {
                 console.log("virag testing", res.status);
 

@@ -15,6 +15,7 @@ import timezone from "dayjs/plugin/timezone";
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
+import server from "../Config";
 
 const UpdateFlight = () => {
     //   const history = useHistory();
@@ -35,7 +36,7 @@ const UpdateFlight = () => {
     React.useEffect(() => {
        
           axios
-        .get("http://localhost:3001/view/getFlight/"+state.id)
+        .get(server+"/view/getFlight/"+state.id)
         .then((res) => {
             console.log(res.data.data.destination);
             setDestination(res.data.data.destination);
@@ -77,7 +78,7 @@ const UpdateFlight = () => {
         console.log("departurewwwwwww",departure);
 
         axios
-        .post("http://localhost:3001/flight/updateFlight",{id:state.id,flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : 1, departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
+        .post(server+"/flight/updateFlight",{id:state.id,flight_no : flightNo, arrival_time: dayjs(arrival).subtract(8, 'hour'),airline_id : 1, departure_time:dayjs(departure).subtract(8, 'hour'),source:source,destination:destination})
         .then((res) => {
             if(res.status==200){
                 alert("flight updated successfully");
