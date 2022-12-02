@@ -63,7 +63,7 @@ Sprint 5: 10/30/2022 - 11/05/2022
 
 
 
-Sprint 6: 11/06/2022 - 11/12/2022
+Sprint 6: 11/04/2022 - 11/17/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		- Stated deploying the integrated project on ec2 instance.
