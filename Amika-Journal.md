@@ -1,12 +1,12 @@
 Sprint 1: 03/07/2022 - 03/13/2022
 Weekly Scrum Report
-What tasks did I work on / complete?
+	-What tasks did I work on / complete?
 		1. Actively took part in Reruirement Gathering
 		2. Helped in Tech Stack Decision process
 		3. Designed the basic Database Schema and setup GitHub environment.
-What am I planning to work on next?
+	-What am I planning to work on next?
 		1. Learning Material UI - React JS for implementing the frontend
-What tasks are blocked waiting on another team member?
+	-What tasks are blocked waiting on another team member?
 		1. None
 
 
@@ -81,6 +81,7 @@ Sprint 7: 04/18/2022 - 04/24/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		1. Testing all the pages 
+		2. Help in styling various components.
 	- What am I planning to work on next?
         	1. Deployment of application on AWS with Auto-scaled Load Balancer.
         	2. Improving the UI
