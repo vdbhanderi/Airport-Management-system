@@ -40,11 +40,11 @@ Sprint 4: 03/28/2022 - 04/03/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
 		1. Designed 'Add/Update Flight' page
-    2. Tested the 'Add Flight' page 
-    3. Started integration of frontend and backend.
+    		2. Tested the 'Add Flight' page 
+    		3. Started integration of frontend and backend.
 	- What am I planning to work on next?
-    1. Start working on the 'View Flight' page
-    2. Create API's for 'Flight Routes/Assign Baggage'
+    		1. Start working on the 'View Flight' page
+    		2. Create API's for 'Flight Routes/Assign Baggage'
 	- What tasks are blocked waiting on another team member?
 		1. None
 
@@ -53,42 +53,40 @@ Sprint 4: 03/28/2022 - 04/03/2022
 Sprint 5: 04/04/2022 - 04/10/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
-		1. Used different Ant Design components.
-        2. Designed Admin Panel page.
+		1. Testing pages with different user input.
+		2. Completed designing the 'Flight Route' Page
+		3. Beautify the pages, adding more dynamic components
 	- What am I planning to work on next?
-		1. To complete Admin Panel dashboard to add rooms to particular franchise of hotel. 
+		1. To complete working on the 'Assign Baggage' Page and add more dynamic components
+		2. To start working on the 'Gate Maintainance' Page.
 	- What tasks are blocked waiting on another team member?
 		1. None
-- Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
-    "COMMUNICATION": Team checked the backlog and re-priotized the work to be done.
+	
 
 
 Sprint 6: 04/11/2022 - 04/17/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
-		1. Completed Admin Dashboard and added different tabs like Bookings, Users, Rooms, etc.
+		1. Completed working on 'Assign Baggage' Page and added different tabs to it.
+		2. Started deploying on ec2 instance.
 	- What am I planning to work on next?
-		1. Merge API to find hotels.	
+		1. Merge all the API's to 'Add/Update/View' Flight.	
 		2. Merge Register and Login API with frontend.  
 	- What tasks are blocked waiting on another team member?
 		1. None
-- Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
-    "COMMUNICATION": Team made sure to meet once in a week. If someone was struggling to get things done, it was communicated clearly and handled as a team.
+
 
 
 Sprint 7: 04/18/2022 - 04/24/2022
 - Weekly Scrum Report
 	- What tasks did I work on / complete?
-		1. Merged API to find hotels.
-		2. Merged Register and Login API with frontend.
-		3. Designed MyBookings page. 
+		1. Testing all the pages 
 	- What am I planning to work on next?
-		1. Testing the application with end to end testing.
-        2. Deployment of application on AWS with Auto-scaled Load Balancer.
+        	1. Deployment of application on AWS with Auto-scaled Load Balancer.
+        	2. Improving the UI
 	- What tasks are blocked waiting on another team member?
 		1. None
-- Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
-    "COMMUNICATION": Team made sure to meet together and to perform end to end testing for checking the overall functionality.
+
 
 
 Sprint 8: 04/25/2022 - 04/01/2022
@@ -100,5 +98,4 @@ Sprint 8: 04/25/2022 - 04/01/2022
 		1. None
 	- What tasks are blocked waiting on another team member?
 		1. None
-- Select one of the XP Core Values and keep a journal of how the team kept these values throughout the project.
-    "COMMUNICATION": Team deployed the web application on AWS
+
