@@ -22,7 +22,7 @@ import LandingNavbar from '../components/LandingNavbar/LandingNavbar';
 import ApplicationCustomerNavbar from '../components/ApplicationCustomerNavbar/ApplicationCustomerNavbar.js';
 import ApplicationAirlineEmpNavbar from "../components/ApplicationAirlineEmpNavbar/ApplicationAirlineEmpNavbar.js";
 import ApplicationAirportEmpNavbar from "../components/ApplicationAirportEmpNavbar/ApplicationAirportEmpNavbar";
-
+import { formatDate } from '../constants/dateConverter';
 import {
     Grid,
     TextField,
@@ -98,6 +98,8 @@ TablePaginationActions.propTypes = {
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
 };
+
+
 
 export default function CustomPaginationActionsTable() {
     const [page, setPage] = React.useState(0);
@@ -265,7 +267,8 @@ export default function CustomPaginationActionsTable() {
 
                                 }
                                 <TableCell style={{ width: 180 }}>
-                                    {new Date(row.departure_time).toLocaleDateString() + " " + new Date(row.departure_time).toLocaleTimeString()}
+                               { formatDate(new Date(row.departure_time))}
+                                    {/* {new Date(row.departure_time).toLocaleDateString() + " " + new Date(row.departure_time).toLocaleTimeString()} */}
                                 </TableCell>
                                 <TableCell style={{ width: 180 }}>
                                     {new Date(row.arrival_time).toLocaleDateString() + " " + new Date(row.arrival_time).toLocaleTimeString()}
