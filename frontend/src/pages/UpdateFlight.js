@@ -42,7 +42,7 @@ const UpdateFlight = () => {
             setDestination(res.data.data.destination);
             setSource(res.data.data.source);
             setArrival(res.data.data.arrival_time);
-            setDeparture(res.data.data.departure_time);
+            setDeparture(getPSTDate(res.data.data.departure_time));
             setFlightNo(res.data.data.flight_no);
              console.log(res.data.data);
     });
@@ -50,7 +50,14 @@ const UpdateFlight = () => {
 
     }, [])
 
-
+    const getPSTDate = (date) => {
+        let d = new Date(date);
+        console.log("Before Updation", d)
+        d = d.getTime();
+        d = d + (8*60*60*1000)
+        console.log("After Updation", d, new Date(d));
+        return new Date(d);
+      }
     const handleOnChangeSource = (event) => {
         setSource(event.target.value);
     };
