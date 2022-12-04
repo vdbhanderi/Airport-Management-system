@@ -196,7 +196,9 @@ router.get('/:duration', function (req, res, next) {
 router.get('/fetchFlightsForAirline/:id', function (req, res, next) {
   var id = req.params.id;
   console.log("flight view Apiiiii", id);
-  db.query('SELECT * FROM flight where airline_id = ?', [id], function (error, results, fields) {
+  var now = dayjs(Date.now()).subtract(8, 'hour');
+  now= now.toISOString();
+  db.query("SELECT * FROM flight where airline_id = ? and ((destination = 'SFO' and arrival_time > '"+ now +"') or (source = 'SFO' and departure_time > '"+ now + "') )", [id], function (error, results, fields) {
     if (error) {
       console.log(error);
       return res.status(500).json({ msg: 'error' });
